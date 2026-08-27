@@ -1,0 +1,52 @@
+patch:
+  # 保留个人开关显示与默认状态。
+  "switches/@0/states": [ 中, 英 ]
+  "switches/@1/reset": 0
+
+  # 中英候选翻译功能。
+  "engine/processors/@before 2": lua_processor@*cn_en_commit_processor
+  "engine/filters/@before 8": lua_filter@*cn_en_annotation_filter
+  cn_en_translation/cache_size: 32
+  cn_en_commit_processor:
+    enable: true
+    commit_english_key: Shift+space
+  cn_en_annotation_filter:
+    enable: true
+    show_for_single_char: false
+    format: " / {english}"
+
+  # 保留旧配置中的候选与预编辑行为。
+  translator/dictionary: rime_zzf
+  translator/preedit_format: []
+  melt_eng/enable_user_dict: true
+  melt_eng/initial_quality: 1.5
+  reduce_english_filter/mode: none
+  aux_code/show_aux_notice: always
+
+  # 保留个人时间候选格式与触发键。
+  date_formats:
+    - "Y-m-d"
+    - "Ymd"
+    - "y年n月j日"
+  time_formats:
+    - "H:M"
+    - "H:M:S"
+  datetime_formats:
+    - "Y-m-d H:M:S"
+    - "ymdHM"
+    - "YmdHMS"
+    - "Y年m月d日 H点M分"
+  key_binder/shijian_keys: [ "j" ]
+
+  # 使用本地万象模型；模型文件继续由本机维护，不提交到 Git。
+  grammar:
+    language: wanxiang-lts-zh-hans
+    collocation_max_length: 8
+    collocation_min_length: 2
+    collocation_penalty: -10
+    non_collocation_penalty: -20
+    weak_collocation_penalty: -35
+    rear_penalty: -12
+  translator/contextual_suggestions: false
+  translator/max_homophones: 5
+  translator/max_homographs: 5
