@@ -3,6 +3,11 @@ patch:
   "switches/@0/states": [ 中, 英 ]
   "switches/@1/reset": 0
 
+  editor:
+    bindings:
+      Return: commit_composition
+      KP_Enter: commit_composition
+
   # 中英候选翻译功能。
   "engine/processors/@before 2": lua_processor@*cn_en_commit_processor
   "engine/filters/@before 8": lua_filter@*cn_en_annotation_filter
@@ -13,7 +18,7 @@ patch:
   cn_en_annotation_filter:
     enable: true
     show_for_single_char: false
-    format: " / {english}"
+    format: "- {english}"
 
   # 保留旧配置中的候选与预编辑行为。
   translator/dictionary: rime_zzf
