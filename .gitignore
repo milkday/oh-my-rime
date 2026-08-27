@@ -14,6 +14,9 @@ sync/
 
 # 自定义文件
 *.custom.yaml
+!default.custom.yaml
+!double_pinyin_flypy.custom.yaml
+!squirrel.custom.yaml
 
 # VSCode 项目文件
 *.code-workspace

@@ -1,0 +1,7 @@
+patch:
+  # 只启用当前使用的小鹤双拼方案。
+  schema_list:
+    - schema: double_pinyin_flypy
+
+  # Shift+Space 留给中英候选翻译处理器使用，不再切换全角模式。
+  "key_binder/bindings/@25": null
