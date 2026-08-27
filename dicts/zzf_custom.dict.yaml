@@ -1,0 +1,169 @@
+# Rime dictionary
+# encoding: utf-8
+---
+name: zzf_custom
+version: "2026.08.27"
+sort: by_weight
+...
+
+左忠飞	zzf	99
+
+iOS	ios	99
+17611251361	17611251361	99
+NFC	nfc	99
+Mac	mac	99
+MCLogger	MCLogger 99
+mlog	mlog 99
+
+# ========== 程序员常用英语单词 ==========
+
+# --- DevOps / 云原生 ---
+Gerrit	gerrit	99
+Kubernetes	kubernetes	99
+kubectl	kubectl	99
+Terraform	terraform	99
+Ansible	ansible	99
+Prometheus	prometheus	99
+Grafana	grafana	99
+ArgoCD	argocd	99
+Istio	istio	99
+Envoy	envoy	99
+Helm	helm	99
+Rancher	rancher	99
+Harbor	harbor	99
+Consul	consul	99
+etcd	etcd	99
+Pulumi	pulumi	99
+Vagrant	vagrant	99
+zed  zed  99
+
+# --- AI / 大模型 ---
+DeepSeek	deepseek	99
+Ollama	ollama	99
+LLaMA	llama	99
+HuggingFace	huggingface	99
+LangChain	langchain	99
+RAG	rag	99
+LoRA	lora	99
+Cursor	cursor	99
+Copilot	copilot	99
+Anthropic	anthropic	99
+Claude	claude	99
+
+# --- 前端 / JS 生态 ---
+Svelte	svelte	99
+SvelteKit	sveltekit	99
+Nuxt	nuxt	99
+Astro	astro	99
+Vite	vite	99
+Vitest	vitest	99
+Bun	bun	99
+Deno	deno	99
+pnpm	pnpm	99
+TailwindCSS	tailwindcss	99
+Turborepo	turborepo	99
+Playwright	playwright	99
+Storybook	storybook	99
+Prettier	prettier	99
+ESLint	eslint	99
+Prisma	prisma	99
+Drizzle	drizzle	99
+Supabase	supabase	99
+tRPC	trpc	99
+
+# --- 后端 / 微服务 ---
+FastAPI	fastapi	99
+gRPC	grpc	99
+Protobuf	protobuf	99
+Kafka	kafka	99
+Nacos	nacos	99
+Dubbo	dubbo	99
+MyBatis	mybatis	99
+Netty	netty	99
+SkyWalking	skywalking	99
+
+# --- 终端 / 编辑器 ---
+Alacritty	alacritty	99
+WezTerm	wezterm	99
+LazyGit	lazygit	99
+LazyVim	lazyvim	99
+Starship	starship	99
+Ghostty	ghostty	99
+
+# --- 其他工具 ---
+Figma	figma	99
+Postman	postman	99
+Insomnia	insomnia	99
+Swagger	swagger	99
+OpenAPI	openapi	99
+Excalidraw	excalidraw	99
+Obsidian	obsidian	99
+Logseq	logseq	99
+n8n	n8n	99
+
+# --- 基础设施 / 可观测性（补充） ---
+ClickHouse	clickhouse	99
+InfluxDB	influxdb	99
+OpenTelemetry	opentelemetry	99
+Jaeger	jaeger	99
+Traefik	traefik	99
+Caddy	caddy	99
+MinIO	minio	99
+OpenTofu	opentofu	99
+Tailscale	tailscale	99
+
+# --- 工程化 / 协议（补充） ---
+JWT	jwt	99
+OAuth	oauth	99
+SSO	sso	99
+Webhook	webhook	99
+CronJob	cronjob	99
+Monorepo	monorepo	99
+Nx	nx	99
+Biome	biome	99
+SWC	swc	99
+Turbopack	turbopack	99
+Rollup	rollup	99
+Webpack	webpack	99
+Babel	babel	99
+Socket.IO	socketio	99
+
+# --- 前端 / 跨端（补充） ---
+Pinia	pinia	99
+TanStack	tanstack	99
+shadcn/ui	shadcnui	99
+Tauri	tauri	99
+Expo	expo	99
+Capacitor	capacitor	99
+Hono	hono	99
+Elysia	elysia	99
+
+# --- Python / 数据（补充） ---
+Bunx	bunx	99
+uv	uv	99
+Ruff	ruff	99
+Hatch	hatch	99
+Poetry	poetry	99
+Pyright	pyright	99
+Pydantic	pydantic	99
+Celery	celery	99
+Sidekiq	sidekiq	99
+DuckDB	duckdb	99
+dbt	dbt	99
+Dagster	dagster	99
+Prefect	prefect	99
+Milvus	milvus	99
+Qdrant	qdrant	99
+Pinecone	pinecone	99
+Chroma	chroma	99
+
+# --- AI / Agent 工具链（补充） ---
+OpenRouter	openrouter	99
+vLLM	vllm	99
+ComfyUI	comfyui	99
+FastGPT	fastgpt	99
+Dify	dify	99
+Aider	aider	99
+Cline	cline	99
+RooCode	roocode	99
+MCP	mcp	99
