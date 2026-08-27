@@ -1,10 +1,12 @@
--- 在候选菜单中按 Shift+Space，上屏当前中文候选的英文映射。
+-- 单按 Shift 上屏原始编码；在候选菜单中按 Shift+Space，上屏当前中文候选的英文映射。
 
 local cn_en_mapping = require("cn_en_mapping")
 
 local M = {}
 local kAccepted = 1
 local kNoop = 2
+local shift_l_keycode = KeyEvent("Shift_L").keycode
+local shift_r_keycode = KeyEvent("Shift_R").keycode
 
 -- 初始化英文上屏快捷键并设置共享分片缓存容量。
 function M.init(env)
@@ -19,6 +21,7 @@ function M.init(env)
     env.commit_english_key = config:get_string(name_space .. "/commit_english_key") or "Shift+space"
     cn_en_mapping.configure(config:get_int("cn_en_translation/cache_size"))
     env.mapping = cn_en_mapping.mapping
+    env.shift_pending = nil
 end
 
 -- 查询当前候选显示文本或原始文本的英文翻译。
@@ -33,14 +36,58 @@ local function find_translation(cand, mapping)
     return mapping[cand.text]
 end
 
--- 处理英文上屏快捷键。
+-- 判断当前按键是否为左右 Shift。
+local function is_shift_key(key)
+    return key.keycode == shift_l_keycode or key.keycode == shift_r_keycode
+end
+
+-- 处理单按 Shift 上屏原始编码。
+local function handle_shift_commit(key, env, context)
+    if is_shift_key(key) then
+        if key:release() then
+            local should_consume = env.shift_pending ~= nil
+            local should_commit = env.shift_pending == "waiting"
+            env.shift_pending = nil
+
+            if should_commit then
+                local input = context.input or ""
+                if input ~= "" then
+                    env.engine:commit_text(input)
+                    context:clear()
+                end
+            end
+            return should_consume and kAccepted or kNoop
+        end
+
+        local input = context.input or ""
+        if input ~= "" and not context:get_option("ascii_mode") then
+            env.shift_pending = "waiting"
+            return kAccepted
+        else
+            env.shift_pending = nil
+        end
+        return kNoop
+    end
+
+    if env.shift_pending == "waiting" and not key:release() then
+        env.shift_pending = "used"
+    end
+    return nil
+end
+
+-- 处理 Shift 原始编码和英文映射上屏快捷键。
 function M.func(key, env)
+    local engine = env.engine
+    local context = engine.context
+    local shift_result = handle_shift_commit(key, env, context)
+    if shift_result ~= nil then
+        return shift_result
+    end
+
     if not env.enable or key:release() or key:repr() ~= env.commit_english_key then
         return kNoop
     end
 
-    local engine = env.engine
-    local context = engine.context
     if not context:has_menu() then
         return kNoop
     end
@@ -63,6 +110,7 @@ end
 -- 释放当前处理器持有的映射引用。
 function M.fini(env)
     env.mapping = nil
+    env.shift_pending = nil
 end
 
 return M
