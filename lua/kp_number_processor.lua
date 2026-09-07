@@ -8,7 +8,7 @@
 --     processors:
 --       - lua_processor@*kp_number_processor
 --   # 小键盘模式（可省略，默认 auto）
---   # auto    : 空闲时直接上屏，输入中参与编码
+--   # auto    : 空闲时放行按键，由应用输入数字；输入中参与编码
 --   # compose : 无论是否在输入中，小键盘都参与编码（不直接上屏）
 --   kp_number_mode: auto
 
@@ -359,7 +359,8 @@ function P.func(key, env)
                 if context.push_input then context:push_input(ch)
                 else context.input = (context.input or "") .. ch end
             else
-                env.engine:commit_text(ch)
+                -- 空闲时由应用处理数字，避免 commit_text 触发额外的输入法组合事件。
+                return RIME_PROCESS_RESULTS.kRejected
             end
         else -- compose
             if context.push_input then context:push_input(ch)
