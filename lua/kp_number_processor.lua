@@ -356,16 +356,22 @@ function P.func(key, env)
         -- 正常数字逻辑
         if mode == "auto" then
             if env.is_composing then
-                if context.push_input then context:push_input(ch)
-                else context.input = (context.input or "") .. ch end
+                if context.push_input then
+                    context:push_input(ch)
+                else
+                    context.input = (context.input or "") .. ch
+                end
             else
-                -- 空闲时由应用处理数字，避免 commit_text 触发额外的输入法组合事件。
                 return RIME_PROCESS_RESULTS.kRejected
             end
         else -- compose
-            if context.push_input then context:push_input(ch)
-            else context.input = (context.input or "") .. ch end
+            if context.push_input then
+                context:push_input(ch)
+            else
+                context.input = (context.input or "") .. ch
+            end
         end
+        
         return RIME_PROCESS_RESULTS.kAccepted
     end
 
