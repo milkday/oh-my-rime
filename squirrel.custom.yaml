@@ -409,6 +409,7 @@ patch:
       ascii_mode: true
     com.apple.Terminal: # 终端
       ascii_mode: true
+      ascii_punct: true            # 中文状态输出英文标点(半角)
     com.microsoft.VSCode: # Visual Studio Code
       ascii_mode: true
       ascii_punct: true            # 中文状态输出英文标点(半角)
@@ -416,6 +417,7 @@ patch:
       ascii_mode: true
     com.apple.dt.Xcode: # Xcode
       ascii_mode: true
+      ascii_punct: true            # 中文状态输出英文标点(半角)
     com.nektony.App-Cleaner-SII: # App Cleaner & Uninstaller
       ascii_mode: true
     com.xunyong.hapigo: # hapigo
@@ -424,13 +426,22 @@ patch:
       ascii_mode: true
     com.mitchellh.ghostty: # Ghostty
       ascii_mode: true
+      ascii_punct: true            # 中文状态输出英文标点(半角)
     com.raycast.macos: # Raycast
       ascii_mode: true
     com.muxy.app: # Muxy
       ascii_mode: true
+      ascii_punct: true            # 中文状态输出英文标点(半角)
     com.cmuxterm.app: # cmux
       ascii_mode: true
     com.jetbrains.intellij: # idea
       ascii_mode: true
     net.kovidgoyal.kitty: # kitty
       ascii_mode: true
+      ascii_punct: true            # 中文状态输出英文标点(半角)
+    dev.zed.Zed: # Zed
+      ascii_mode: true
+      ascii_punct: true            # 中文状态输出英文标点(半角)
+    com.DanPristupov.Fork: # Fork
+      ascii_mode: true
+      ascii_punct: true            # 中文状态输出英文标点(半角)
