@@ -186,7 +186,7 @@ chaifen_cc:
   tips: char             #  单字加滤镜: char; 全部: all，
 
  # 最大输入长度
-codeLengthLimit_processor: 25
+codeLengthLimit_processor: 26
 
 
 # 小鹤音形配置
