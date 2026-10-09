@@ -1,8 +1,47 @@
--- 为中文候选项追加英文翻译注释。
+-- 仅为当前高亮的中文候选项追加英文翻译注释。
 
 local cn_en_mapping = require("cn_en_mapping")
 
 local M = {}
+
+-- 高亮变化时重建候选注释，并保留当前选择和翻页状态。
+local function refresh_selected_translation(context, env)
+    if env.refreshing then
+        return
+    end
+
+    local composition = context.composition
+    local segment = not composition:empty() and composition:back() or nil
+    if not segment or not segment.menu or segment.status ~= "kGuess" then
+        env.selected_index = nil
+        return
+    end
+
+    local selected_index = segment.selected_index
+    if env.selected_index ~= nil and selected_index ~= env.selected_index then
+        local paging = segment:has_tag("paging")
+        env.refreshing = true
+        env.refresh_index = selected_index
+        context:refresh_non_confirmed_composition()
+
+        segment = not context.composition:empty() and context.composition:back() or nil
+        if not segment or not segment.menu then
+            env.refresh_index = nil
+            env.refreshing = false
+            env.selected_index = nil
+            return
+        end
+        local count = segment.menu:prepare(selected_index + 1)
+        segment.selected_index = math.max(0, math.min(selected_index, count - 1))
+        if paging then
+            segment.tags = segment.tags + Set({ "paging" })
+        end
+        env.refresh_index = nil
+        env.refreshing = false
+    end
+
+    env.selected_index = segment.selected_index
+end
 
 -- 初始化候选注释配置并设置共享分片缓存容量。
 function M.init(env)
@@ -33,6 +72,11 @@ function M.init(env)
 
     cn_en_mapping.configure(config:get_int("cn_en_translation/cache_size"))
     env.mapping = cn_en_mapping.mapping
+    if env.enable then
+        env.update_connection = env.engine.context.update_notifier:connect(function(context)
+            refresh_selected_translation(context, env)
+        end)
+    end
 end
 
 -- 判断候选文本是否以常用中文字符开头。
@@ -53,10 +97,19 @@ local function candidate_texts(cand)
     return visible_text, original_text, genuine
 end
 
--- 为候选流中的中文候选追加英文注释。
+-- 按去重后的候选序号，仅为本轮高亮项查询并追加英文注释。
 function M.func(input, env)
+    local selected_index = env.refresh_index or 0
+    env.selected_index = selected_index
+    local index = -1
+    local seen = {}
     for cand in input:iter() do
-        if env.enable then
+        local first_occurrence = not seen[cand.text]
+        if first_occurrence then
+            seen[cand.text] = true
+            index = index + 1
+        end
+        if env.enable and first_occurrence and index == selected_index then
             local visible_text, original_text, genuine = candidate_texts(cand)
             local lookup_text = original_text or visible_text
             local type_allowed = next(env.only_for_types) == nil or env.only_for_types[cand.type] ~= nil
@@ -93,8 +146,13 @@ function M.func(input, env)
     end
 end
 
--- 释放当前过滤器持有的映射引用。
+-- 断开更新通知并释放候选及映射引用。
 function M.fini(env)
+    if env.update_connection then
+        env.update_connection:disconnect()
+        env.update_connection = nil
+    end
+    env.selected_index = nil
     env.mapping = nil
 end
 
