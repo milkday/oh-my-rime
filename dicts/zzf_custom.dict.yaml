@@ -12,8 +12,8 @@ iOS	ios	99
 17611251361	17611251361	99
 NFC	nfc	99
 Mac	mac	99
-MCLogger	MCLogger 99
-mlog	mlog 99
+MCLogger	mclogger	99
+mlog	mlog	99
 
 # ========== 程序员常用英语单词 ==========
 
@@ -29,13 +29,12 @@ ArgoCD	argocd	99
 Istio	istio	99
 Envoy	envoy	99
 Helm	helm	99
-Rancher	rancher	99
 Harbor	harbor	99
 Consul	consul	99
 etcd	etcd	99
 Pulumi	pulumi	99
 Vagrant	vagrant	99
-zed  zed  99
+zed	zed	99
 
 # --- AI / 大模型 ---
 DeepSeek	deepseek	99
@@ -100,6 +99,7 @@ Excalidraw	excalidraw	99
 Obsidian	obsidian	99
 Logseq	logseq	99
 n8n	n8n	99
+Jira	jira	99
 
 # --- 基础设施 / 可观测性（补充） ---
 ClickHouse	clickhouse	99
@@ -159,7 +159,6 @@ Chroma	chroma	99
 
 # --- AI / Agent 工具链（补充） ---
 OpenRouter	openrouter	99
-vLLM	vllm	99
 ComfyUI	comfyui	99
 FastGPT	fastgpt	99
 Dify	dify	99
