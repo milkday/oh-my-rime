@@ -1,12 +1,14 @@
 -- 单按 Shift 上屏原始编码；在候选菜单中按 Shift+Space，上屏当前中文候选的英文映射。
 
 local cn_en_mapping = require("cn_en_mapping")
+local custom_english = require("custom_english")
 
 local M = {}
 local kAccepted = 1
 local kNoop = 2
 local shift_l_keycode = KeyEvent("Shift_L").keycode
 local shift_r_keycode = KeyEvent("Shift_R").keycode
+local return_keycode = KeyEvent("Return").keycode
 
 -- 初始化英文上屏快捷键并设置共享分片缓存容量。
 function M.init(env)
@@ -19,6 +21,7 @@ function M.init(env)
     end
 
     env.commit_english_key = config:get_string(name_space .. "/commit_english_key") or "Shift+space"
+    env.custom_english_key = config:get_string(name_space .. "/custom_english_key") or "Control+Return"
     cn_en_mapping.configure(config:get_int("cn_en_translation/cache_size"))
     env.mapping = cn_en_mapping.mapping
     env.shift_pending = nil
@@ -75,7 +78,7 @@ local function handle_shift_commit(key, env, context)
     return nil
 end
 
--- 处理 Shift 原始编码和英文映射上屏快捷键。
+-- 处理 Shift 原始编码、英文映射上屏和 Ctrl+Return 英文收词。
 function M.func(key, env)
     local engine = env.engine
     local context = engine.context
@@ -84,7 +87,26 @@ function M.func(key, env)
         return shift_result
     end
 
-    if not env.enable or key:release() or key:repr() ~= env.commit_english_key then
+    if key:release() then
+        return kNoop
+    end
+
+    local input = context.input or ""
+    if not context:get_option("ascii_mode") and (key:repr() == env.custom_english_key or (key.keycode == return_keycode and key:ctrl())) and input:match("^[A-Za-z]+$") then
+        if custom_english.add(input) then
+            engine:commit_text(input)
+            context:clear()
+        else
+            local composition = context.composition
+            if not composition:empty() then
+                composition:back().prompt = "收词失败，请检查 custom_english.txt 写入权限"
+            end
+            log.error("无法写入英文个人词库 custom_english.txt")
+        end
+        return kAccepted
+    end
+
+    if not env.enable or key:repr() ~= env.commit_english_key then
         return kNoop
     end
 

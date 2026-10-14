@@ -1,0 +1,8 @@
+dotfile	dotfile
+hdr	HDR
+kiro	Kiro
+mise	mise
+muxy	Muxy
+rime	Rime
+sdr	SDR
+sonora	Sonora

@@ -15,10 +15,14 @@ patch:
   cn_en_commit_processor:
     enable: true
     commit_english_key: Shift+space
+    custom_english_key: Control+Return
   cn_en_annotation_filter:
     enable: true
     show_for_single_char: false
     format: "- {english}"
+
+  # Ctrl+Return 收录英文，使用独立个人词库即时提供候选。
+  "engine/translators/@before 7": lua_translator@*custom_english
 
   # 保留旧配置中的候选与预编辑行为。
   translator/dictionary: rime_zzf
