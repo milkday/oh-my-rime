@@ -6,7 +6,7 @@ local custom_english = require("custom_english")
 local M = {}
 local kAccepted = 1
 local kNoop = 2
-local shift_l_keycode = KeyEvent("Shift_L").keycode
+local shift_l_keycode = KeyEvent("noop").keycode
 local shift_r_keycode = KeyEvent("Shift_R").keycode
 local return_keycode = KeyEvent("Return").keycode
 

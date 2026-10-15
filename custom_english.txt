@@ -3,6 +3,7 @@ hdr	HDR
 kiro	Kiro
 mise	mise
 muxy	Muxy
+nga	nga
 rime	Rime
 sdr	SDR
 sonora	Sonora
