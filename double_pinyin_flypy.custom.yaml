@@ -56,6 +56,6 @@ patch:
     non_collocation_penalty: -20
     weak_collocation_penalty: -35
     rear_penalty: -12
-  translator/contextual_suggestions: false
+  translator/contextual_suggestions: true
   translator/max_homophones: 5
   translator/max_homographs: 5

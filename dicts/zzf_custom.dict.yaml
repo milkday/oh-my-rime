@@ -18,7 +18,6 @@ mlog	mlog	99
 # ========== 程序员常用英语单词 ==========
 
 # --- DevOps / 云原生 ---
-Gerrit	gerrit	99
 Kubernetes	kubernetes	99
 kubectl	kubectl	99
 Terraform	terraform	99
@@ -99,7 +98,6 @@ Excalidraw	excalidraw	99
 Obsidian	obsidian	99
 Logseq	logseq	99
 n8n	n8n	99
-Jira	jira	99
 
 # --- 基础设施 / 可观测性（补充） ---
 ClickHouse	clickhouse	99
