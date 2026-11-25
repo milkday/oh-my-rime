@@ -47,9 +47,9 @@ patch:
     - "Y年m月d日 H点M分"
   key_binder/shijian_keys: [ "j" ]
 
-  # 使用本地万象模型；模型文件继续由本机维护，不提交到 Git。
+  # 使用 rime-qwen-freq 的 Qwen3-14B 蒸馏模型。模型文件不提交到 Git。
   grammar:
-    language: wanxiang-lts-zh-hans
+    language: qwen14b-zh-hans
     collocation_max_length: 8
     collocation_min_length: 2
     collocation_penalty: -10

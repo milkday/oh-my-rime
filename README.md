@@ -95,6 +95,20 @@ Rime 配置教程：
 如果你喜欢使用 Rime 打一些长句，那么强烈建议配合语言模型来使用。参考教程:
 - [Rime 内如何配置语言模型 -- 薄荷输入配置教程](https://www.mintimate.cc/zh/guide/languageModel.html)
 
+### 本配置使用的语言模型（个人分支）
+
+小鹤双拼方案使用 [rime-qwen-freq](https://github.com/mizorewww/rime-qwen-freq) 从 Qwen3-14B-Base 蒸馏的语法模型 `qwen14b-zh-hans.gram`（约 11.4 MiB）。`.gram` 已在 `.gitignore` 中忽略，拉取配置后需手动下载：
+
+```bash
+cd ~/Library/Rime
+curl -LO https://github.com/mizorewww/rime-qwen-freq/releases/latest/download/qwen14b-zh-hans.gram.gz
+gunzip qwen14b-zh-hans.gram.gz   # 解压后得到 qwen14b-zh-hans.gram，放在 Rime 用户目录根下
+```
+
+然后重新部署。模型在 `double_pinyin_flypy.custom.yaml` 的 `grammar/language: qwen14b-zh-hans` 中启用；缺少模型文件时整句组词会退化为无语言模型的效果。
+
+同一项目的计算机/AI 术语词库 `dicts/cs_ai.dict.yaml` 已包含在仓库中，并在 `rime_zzf.dict.yaml` 中导入，无需另行下载。
+
 ## 配置文件说明
 
 - `default.yaml` 设置输入法、如何切换输入法、翻页等；建议自行创建`default.custom.yaml`来覆写薄荷配置的`default.yaml`.
