@@ -1,6 +1,10 @@
 add	add
+bugfix	Bugfix
 ddf	ddf
 dotfile	dotfile
+fdf	fdf
+feature	Feature
+fzf	fzf
 gerrit	Gerrit
 hdr	HDR
 jira	Jira
