@@ -4,7 +4,8 @@ version: "2026.08.27"
 sort: by_weight
 use_preset_vocabulary: false
 import_tables:
-  - dicts/mingren
+  - dicts/rime_mint.famous
+  - dicts/rime_mint.artists
   - dicts/zzf_custom
   - dicts/custom_simple
   - dicts/cs_ai
@@ -13,7 +14,6 @@ import_tables:
   - dicts/rime_mint.correlation
   - dicts/rime_mint.compatible
   - dicts/rime_mint.places
-  - dicts/rime_mint.ext
   - dicts/other_kaomoji
   - dicts/rime_ice.others
 ...
